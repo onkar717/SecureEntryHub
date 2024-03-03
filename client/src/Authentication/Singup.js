@@ -23,7 +23,7 @@ const SignUp = () => {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${Signuppage})` }} />
+      <img src={Signuppage}  className="absolute inset-0 bg-cover bg-center" />
       <div className="z-10 max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
         <div>
           <h2 className="text-3xl font-extrabold text-gray-900 text-center">Sign Up</h2>
@@ -40,7 +40,7 @@ const SignUp = () => {
               onChange={(e) => setname(e.target.value)} 
               required 
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Email address" 
+              placeholder="Name" 
             />
           </div>
           <div>
@@ -78,8 +78,8 @@ const SignUp = () => {
               id="number" 
               name="number" 
               autoComplete="new-number" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
+              value={number} 
+              onChange={(e) => setnumber(e.target.value)} 
               required 
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
               placeholder="Number" 
@@ -109,3 +109,79 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+
+
+// Greetings, everyone. 
+// I'm Onkar Shelke, 
+// a sophomore from Pdeas
+// College of Engineering, 
+// Manjri. 
+//  Since I was young, 
+//  I've been fascinated 
+//  by technology. 
+// iam a MERN stack developer. 
+// Looking at the future, 
+// I'm interested in AI/ML 
+// technologies.
+
+// In my role as
+//  Event Manager/
+//  Vice President
+//   at the Linux Club,
+//    I've learned a 
+//    lot about leadership, 
+//    management, and
+//  organization. 
+//  Additionally,
+//  I'm proud to say 
+//  I'm the founding 
+//  lead of the GDSC 
+//  chapter at my institute.
+// I've worked hard to
+//  create an environment
+//   where students can 
+//   connect with top-tier 
+//   colleges and gain
+//  an edge in the tech industry.
+
+// I firmly believe
+// that GDSC is more
+// than just a place
+// to learn—it's a 
+// community where
+// people who love
+// technology come
+// together. 
+// I'm really passionate 
+// about creating projects 
+// that make a positive
+//  impact. Right now,
+//  I'm working on the
+//  SecurityCommunityHub,
+//   a project that's
+//    close to my heart.
+
+// Aside from my
+//  college commitments, 
+//  I also volunteer at
+//   the CND and Kcd, 
+//   a big tech event
+//    in Pune
+// I'm also pretty good 
+// at problem-solving 
+// with data structures 
+// and algorithms.
+
+// Combining my leadership
+//  skills, technical knowledge
+//  and commitment to 
+//  making a difference, 
+//  I believe I'm the right
+//   person to lead the
+//    Google Developer Student 
+//    Club at Pdeas College of 
+//    Engineering, Manjri.
+//     Thank you for 
+//     considering my
+//      application.
