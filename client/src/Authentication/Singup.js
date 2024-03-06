@@ -1,104 +1,122 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Signuppage from '../Images/singup.jpg'; // Make sure to import the correct image file
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Signuppage from "../Images/singup.jpg"; // Make sure to import the correct image file
 
 const SignUp = () => {
-  const [name, setname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [number, setnumber] = useState('');
-  
+  const [name, setname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [number, setnumber] = useState("");
+
   const handleSignUp = (event) => {
     event.preventDefault();
     // Perform signup logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('number:', number);
+    console.log("Email:", email);
+    console.log("Password:", password);
+    console.log("number:", number);
     // Clear form fields after submission
-    setname('');
-    setEmail('');
-    setPassword('');
-    setnumber('');
+    setname("");
+    setEmail("");
+    setPassword("");
+    setnumber("");
   };
 
+  // const inputStyle = (isFocused) => ({
+  //   borderImage: isFocused ? 'linear-gradient(270deg, #FAAF3A 0%, #F7635B 52.6%, #F75878 100%) 1' : 'none',
+  //   borderWidth: '2px'
+  // });
+
   return (
-    <div className="relative flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <img src={Signuppage}  className="absolute inset-0 bg-cover bg-center" />
+    <div className="relative flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-yellow-50">
+      <img src={Signuppage} className="absolute inset-0 bg-cover bg-center" />
       <div className="z-10 max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
         <div>
-          <h2 className="text-3xl font-extrabold text-gray-900 text-center">Sign Up</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 text-center">
+            Sign Up
+          </h2>
         </div>
         <form onSubmit={handleSignUp} className="space-y-6">
-        <div>
-            <label htmlFor="name" className="sr-only">Name</label>
-            <input 
-              type="name" 
-              id="name" 
-              name="name" 
-              autoComplete="name" 
-              value={name} 
-              onChange={(e) => setname(e.target.value)} 
-              required 
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Name" 
+          <div>
+            <label htmlFor="name" className="sr-only">
+              Name
+            </label>
+            <input
+              type="name"
+              id="name"
+              name="name"
+              autoComplete="name"
+              value={name}
+              onChange={(e) => setname(e.target.value)}
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:border-gradient"
+              placeholder="Name"
             />
           </div>
           <div>
-            <label htmlFor="email" className="sr-only">Email address</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              autoComplete="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Email address" 
+            <label htmlFor="email" className="sr-only">
+              Email address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:border-gradient"
+              placeholder="Email address"
             />
           </div>
           <div>
-            <label htmlFor="password" className="sr-only">Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              autoComplete="new-password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              required 
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
-              placeholder="Password" 
+            <label htmlFor="password" className="sr-only">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:border-gradient"
+              placeholder="Password"
             />
           </div>
           <div>
-            <label htmlFor="number" className="sr-only">Number</label>
-            <input 
-              type="number" 
-              id="number" 
-              name="number" 
-              autoComplete="new-number" 
-              value={number} 
-              onChange={(e) => setnumber(e.target.value)} 
-              required 
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
-              placeholder="Number" 
+            <label htmlFor="number" className="sr-only">
+              Number
+            </label>
+            <input
+              type="number"
+              id="number"
+              name="number"
+              autoComplete="new-number"
+              value={number}
+              onChange={(e) => setnumber(e.target.value)}
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:border-gradient"
+              placeholder="Number"
             />
           </div>
-          
+
           <div>
-            <button 
-              type="submit" 
-              className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            <button
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-yellow-300 via-red-500 to-pink-500 hover:from-yellow-400 hover:via-red-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Sing-Up
+              Sign Up
             </button>
           </div>
           <div className="text-center text-sm">
             <p>
-              Already have an account?{' '}
-              <Link to="/signin" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Sign In
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-medium text-red-600"
+              >
+                Login
               </Link>
             </p>
           </div>
@@ -109,79 +127,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-
-
-// Greetings, everyone. 
-// I'm Onkar Shelke, 
-// a sophomore from Pdeas
-// College of Engineering, 
-// Manjri. 
-//  Since I was young, 
-//  I've been fascinated 
-//  by technology. 
-// iam a MERN stack developer. 
-// Looking at the future, 
-// I'm interested in AI/ML 
-// technologies.
-
-// In my role as
-//  Event Manager/
-//  Vice President
-//   at the Linux Club,
-//    I've learned a 
-//    lot about leadership, 
-//    management, and
-//  organization. 
-//  Additionally,
-//  I'm proud to say 
-//  I'm the founding 
-//  lead of the GDSC 
-//  chapter at my institute.
-// I've worked hard to
-//  create an environment
-//   where students can 
-//   connect with top-tier 
-//   colleges and gain
-//  an edge in the tech industry.
-
-// I firmly believe
-// that GDSC is more
-// than just a place
-// to learn—it's a 
-// community where
-// people who love
-// technology come
-// together. 
-// I'm really passionate 
-// about creating projects 
-// that make a positive
-//  impact. Right now,
-//  I'm working on the
-//  SecurityCommunityHub,
-//   a project that's
-//    close to my heart.
-
-// Aside from my
-//  college commitments, 
-//  I also volunteer at
-//   the CND and Kcd, 
-//   a big tech event
-//    in Pune
-// I'm also pretty good 
-// at problem-solving 
-// with data structures 
-// and algorithms.
-
-// Combining my leadership
-//  skills, technical knowledge
-//  and commitment to 
-//  making a difference, 
-//  I believe I'm the right
-//   person to lead the
-//    Google Developer Student 
-//    Club at Pdeas College of 
-//    Engineering, Manjri.
-//     Thank you for 
-//     considering my
-//      application.

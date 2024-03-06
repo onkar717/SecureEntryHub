@@ -9,7 +9,6 @@ import Service from './components/Service';
 import Home from './components/Home';
 import ContactForm from './components/ContactForm';
 import Login from './Authentication/Login';
-import Singin from './Authentication/Singin';
 import SignUp from './Authentication/Singup';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,8 +22,7 @@ root.render(
     <Route path="/contact" element={<ContactForm/>} />
     <Route path="/services" element={<Service/>} />
     <Route path="/login" element={<Login/>} />
-    <Route path="/signin" element={<Singin/>} />
-    <Route path='/singup' element={<SignUp />} />
+    <Route path='/signup' element={<SignUp />} />
   </Routes>
 </BrowserRouter>
   </React.StrictMode>

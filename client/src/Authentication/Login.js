@@ -1,25 +1,44 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import Signuppage from '../Images/login.jpg'; // Make sure to import the correct image file
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [filled, setFilled] = useState(false);
 
   const handleSignUp = (event) => {
     event.preventDefault();
-    // Perform signup logic here
     console.log('Email:', email);
     console.log('Password:', password);
-    // Clear form fields after submission
+    // Reset input fields and focus states
     setEmail('');
+    setPassword('');
+    setEmailFocused(false);
+    setPasswordFocused(false);
   };
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+    setFilled(email.trim() !== '' && password.trim() !== '');
+  };
+
+  const inputStyle = (isFocused) => ({
+    borderImage: isFocused ? 'linear-gradient(270deg, #FAAF3A 0%, #F7635B 52.6%, #F75878 100%) 1' : 'none',
+    borderWidth: '2px'
+  });
+
   return (
-    <div className="relative flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-      <div className="z-10 max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md ml-8">
+    <div className="relative flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className="z-10 max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
         <div>
-          <h2 className="text-3xl font-extrabold text-gray-900 text-center">Login Page</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 text-center">Login</h2>
         </div>
         <form onSubmit={handleSignUp} className="space-y-6">
           <div>
@@ -30,9 +49,12 @@ const Login = () => {
               name="email" 
               autoComplete="email" 
               value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+              onChange={handleInputChange} 
+              onFocus={() => setEmailFocused(true)}
+              onBlur={() => setEmailFocused(false)}
               required 
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900 focus:outline-none sm:text-sm"
+              style={inputStyle(emailFocused)}
               placeholder="Email address" 
             />
           </div>
@@ -42,27 +64,31 @@ const Login = () => {
               type="password" 
               id="password" 
               name="password" 
-              autoComplete="new-password" 
+              autoComplete="current-password" 
               value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
+              onChange={handleInputChange} 
+              onFocus={() => setPasswordFocused(true)}
+              onBlur={() => setPasswordFocused(false)}
               required 
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 text-gray-900 focus:outline-none sm:text-sm" 
+              style={inputStyle(passwordFocused)}
               placeholder="Password" 
             />
           </div>
           <div>
             <button 
               type="submit" 
-              className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className={`w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${filled ? 'bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
+              disabled={!filled}
             >
-              Sign Up
+              Login
             </button>
           </div>
-          <div className="text-center text-sm">
-            <p>
-              Already have an account?{' '}
-              <Link to="/signin" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Sign In
+          <div className="text-center  text-sm">
+            <p className='flex justify-between text-red-600'>
+              Forgot Password?
+              <Link to="/signup" className="font-medium text-red-600 ">
+                Sign Up
               </Link>
             </p>
           </div>
