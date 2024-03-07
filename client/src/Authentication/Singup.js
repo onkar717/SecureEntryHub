@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Signuppage from "../Images/singup.jpg"; // Make sure to import the correct image file
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [name, setname] = useState("");
@@ -8,23 +9,35 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [number, setnumber] = useState("");
 
-  const handleSignUp = (event) => {
+  const navigate = useNavigate();
+
+  const handleSignUp = async (event) => {
     event.preventDefault();
-    // Perform signup logic here
     console.log("Email:", email);
     console.log("Password:", password);
-    console.log("number:", number);
-    // Clear form fields after submission
-    setname("");
-    setEmail("");
-    setPassword("");
-    setnumber("");
-  };
+    console.log("Number:", number);
 
-  // const inputStyle = (isFocused) => ({
-  //   borderImage: isFocused ? 'linear-gradient(270deg, #FAAF3A 0%, #F7635B 52.6%, #F75878 100%) 1' : 'none',
-  //   borderWidth: '2px'
-  // });
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password, number }),
+      });
+      const data = await response.json();
+      console.log("Signup successful:", data);
+      navigate('/login')
+      // Clear form fields after successful signup
+      setname("");
+      setEmail("");
+      setPassword("");
+      setnumber("");
+    } catch (error) {
+      console.error("Error signing up:", error);
+      // Handle signup error here
+    }
+  };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-yellow-50">
@@ -41,7 +54,7 @@ const SignUp = () => {
               Name
             </label>
             <input
-              type="name"
+              type="text"
               id="name"
               name="name"
               autoComplete="name"
@@ -101,6 +114,8 @@ const SignUp = () => {
             />
           </div>
 
+          {/* Add more input fields here as needed */}
+          
           <div>
             <button
               type="submit"
@@ -112,10 +127,7 @@ const SignUp = () => {
           <div className="text-center text-sm">
             <p>
               Already have an account?{" "}
-              <Link
-                to="/login"
-                className="font-medium text-red-600"
-              >
+              <Link to="/login" className="font-medium text-red-600">
                 Login
               </Link>
             </p>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,10 +9,12 @@ const Login = () => {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [filled, setFilled] = useState(false);
 
-  const handleSignUp = (event) => {
+  const navigate = useNavigate();
+
+  const handleSignUp = async (event) => {
     event.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    // Call fetchlogin function to send login request
+    fetchlogin(email, password);
     // Reset input fields and focus states
     setEmail('');
     setPassword('');
@@ -19,15 +22,27 @@ const Login = () => {
     setPasswordFocused(false);
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
+  const fetchlogin = async (email, password) => {
+    try {
+      const response = await fetch('http://localhost:5000/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+      navigate('/');
+      console.log(data);
+    } catch (error) {
+      console.error('Error logging in:', error);
     }
+  }
+
+  useEffect(() => {
+    // Check if email and password are filled
     setFilled(email.trim() !== '' && password.trim() !== '');
-  };
+  }, [email, password]);
 
   const inputStyle = (isFocused) => ({
     borderImage: isFocused ? 'linear-gradient(270deg, #FAAF3A 0%, #F7635B 52.6%, #F75878 100%) 1' : 'none',
@@ -40,7 +55,7 @@ const Login = () => {
         <div>
           <h2 className="text-3xl font-extrabold text-gray-900 text-center">Login</h2>
         </div>
-        <form onSubmit={handleSignUp} className="space-y-6">
+        <form onSubmit={handleSignUp} action='post' className="space-y-6">
           <div>
             <label htmlFor="email" className="sr-only">Email address</label>
             <input 
@@ -49,7 +64,7 @@ const Login = () => {
               name="email" 
               autoComplete="email" 
               value={email} 
-              onChange={handleInputChange} 
+              onChange={(e) => setEmail(e.target.value)}
               onFocus={() => setEmailFocused(true)}
               onBlur={() => setEmailFocused(false)}
               required 
@@ -66,7 +81,7 @@ const Login = () => {
               name="password" 
               autoComplete="current-password" 
               value={password} 
-              onChange={handleInputChange} 
+              onChange={(e) => setPassword(e.target.value)}
               onFocus={() => setPasswordFocused(true)}
               onBlur={() => setPasswordFocused(false)}
               required 

@@ -1,16 +1,24 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
+const User = require('../Modles/UserSchema')
 
-// Secret key for JWT signing and verification
-const secretKey = 'yourSecretKey'; // Same secret key used for token generation
+const Authenticate = async (req , res , next) => {
+    try {
+        const token = req.cookies.jwtoken ;
+        console.log(`token ahe ka nahi bhag ${token}`);
+        const verifyToken = jwt.verify(token, process.env.SECRETKEY);
+        console.log(`Verify hoat ahe ka bhag token ${verifyToken}`);
+        const rootuser = await User.findOne({_id:verifyToken._id , "token":token})
+        console.log(`Root user Check kar shemnya ${rootuser}`);
+        if (!rootuser) {throw new Error('User not Found')}
+        req.token = token;
+        req.rootuser = rootuser;
+        req.userId = rootuser._id;
 
-// Sample JWT token (replace this with the token you want to verify)
-const token = 'yourJWTToken';
-
-// Verify JWT token
-jwt.verify(token, secretKey, (err, decoded) => {
-    if (err) {
-        console.error('JWT verification failed:', err.message);
-    } else {
-        console.log('Decoded JWT payload:', decoded);
+        next();
+    } catch (error) {
+        res.status(401).send('Unauthoraized ye re   ')
+        console.log(error);
     }
-});
+}
+
+module.exports = Authenticate
