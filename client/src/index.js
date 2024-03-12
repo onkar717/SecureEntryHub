@@ -10,6 +10,8 @@ import Home from './components/Home';
 import ContactForm from './components/ContactForm';
 import Login from './Authentication/Login';
 import SignUp from './Authentication/Singup';
+import Signin from './Authentication/Signin';
+import Profile from './components/Profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,9 +21,11 @@ root.render(
   <Routes>
     <Route path="/" element={<Home/>} />
     <Route path="/about" element={<About/>} />
+    <Route path="/profile" element={<Profile/>} />
     <Route path="/contact" element={<ContactForm/>} />
     <Route path="/services" element={<Service/>} />
     <Route path="/login" element={<Login/>} />
+    <Route path='/signin' element={<Signin />} />
     <Route path='/signup' element={<SignUp />} />
   </Routes>
 </BrowserRouter>

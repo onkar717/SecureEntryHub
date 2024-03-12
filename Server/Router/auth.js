@@ -1,11 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const generateToken = require('../midlleware/generate'); // Import generateToken function
 const Authenticate = require('../midlleware/Authenticate');
 const cookieParser = require('cookie-parser');
 const router = express.Router();
 
 require('../DB/connection');
+router.use(cookieParser())
 
 const User = require('../Modles/UserSchema');
 
@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
     try {
         const userExists = await User.findOne({ email: email });
         if (userExists) {
-            return res.status(422).json({ error: "Email is Already Exists" });
+                return res.status(422).json({ error: "Email is Already Exists" });
         } else {
             const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -33,7 +33,8 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.post('/login',Authenticate, async (req, res) => {
+//
+router.post('/login',Authenticate , async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -43,7 +44,7 @@ router.post('/login',Authenticate, async (req, res) => {
 
         const userlogin = await User.findOne({ email: email });
         if (!userlogin) {
-            return res.status(400).json({ error: "Not login" });
+            return res.status(400).json({ error: "User not found" });
         }
 
         const isPasswordValid = await bcrypt.compare(password, userlogin.password);
@@ -52,19 +53,25 @@ router.post('/login',Authenticate, async (req, res) => {
         }
 
         // Generate JWT token upon successful login
-        const token = generateToken({ email: userlogin.email, number: userlogin.number });
+        const token = await userlogin.generateToken();
+        console.log(token);
 
         // Set JWT token as a cookie in the response
-        res.cookie("jwtoken", token ,  {
-            expires: new Date(Date.now() + 25892000000),
+        res.cookie("jwtoken", token, {
+            expires: new Date(Date.now() + 25892000000), // Example expiration time
             httpOnly: true
-          });
-    
+        });
+
         return res.status(200).json({ message: "User login successfully" });
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+router.get('/about', Authenticate ,(req,res) => {
+    console.log('hello my about');
+    res.send(req.rootuser)  
+  })
+  
 
 module.exports = router;
