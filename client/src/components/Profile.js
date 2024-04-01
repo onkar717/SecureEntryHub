@@ -1,50 +1,60 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaUser } from 'react-icons/fa';
 
 function Profile() {
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
 
-    const navigate = useNavigate();
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/about', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
 
-    const [data , setdatauser] = useState([]);
-
-    const callAboutPage = async () => {
-        try {
-          const res = await fetch('/about' , {
-            method:"GET",
-            headers:{
-              Accept:"application/json",
-              "Content-Type" : "application/json"
-            },
-            credentials:'include'
-          })
-  
-          const data = await res.json();
-          setdatauser(data);
-          console.log(data);
-  
-          if (res.status === 400) {
-            const error = new Error(res.error)
-            throw error;
-          }
-  
-        } catch (error) {
-          console.log(error);
-          navigate('/login');
-        }
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
       }
-  
-    useEffect(() => {
-      callAboutPage();
-    }, [])
+
+      const userData = await response.json();
+      setData(userData);
+    } catch (error) {
+      console.error(error);
+      navigate('/login');
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <>
-    <h1>{data.name}</h1>
-    <h1>{data.email}</h1>
-    <h1>{data.password}</h1>
-    <h1>{data.number}</h1>
-     </>
-  )
+    <div className="max-w-xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="flex items-center p-4 border-b border-gray-300">
+        <div className="flex-shrink-0">
+          <div className="w-16 h-16 flex justify-center items-center bg-gray-300 rounded-full border-4 border-white">
+            <FaUser className="text-gray-600 text-lg" />
+          </div>
+        </div>
+        <div className="ml-4">
+          {data ? (
+            <>
+              <h2 className="text-xl font-semibold text-gray-800">{data.name}</h2>
+              <p className="text-sm text-gray-600">{data.email}</p>
+              {/* Display other profile information here */}
+            </>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;

@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaAngleDown, FaAngleUp, FaHome, FaBuilding, FaUserFriends, FaClipboardList, FaInfoCircle, FaBriefcase } from "react-icons/fa";
+import {
+  FaAngleDown,
+  FaAngleUp,
+  FaHome,
+  FaBuilding,
+  FaUserFriends,
+  FaClipboardList,
+  FaInfoCircle,
+  FaBriefcase,
+} from "react-icons/fa";
+import { FaUser } from "react-icons/fa"; // Import the user icon from React Icons
 
 const Header = () => {
   const [showBrandDropdown, setShowBrandDropdown] = useState(false);
@@ -112,14 +122,42 @@ const Header = () => {
                       className="text-gray-800 flex items-center py-2 px-3 rounded-md hover:text-red-500"
                     >
                       <FaBriefcase className="mr-2" style={iconStyle} />
-                      Add Platform
+                      Real Estate
                     </Link>
                     <Link
                       to="/brand/solution2"
                       className="text-gray-800 flex items-center py-2 px-3 rounded-md hover:text-red-500"
                     >
                       <FaInfoCircle className="mr-2" style={iconStyle} />
-                      Industries
+                      Healthcare
+                    </Link>
+                    <Link
+                      to="/brand/solution1"
+                      className="text-gray-800 flex items-center py-2 px-3 rounded-md hover:text-red-500"
+                    >
+                      <FaBriefcase className="mr-2" style={iconStyle} />
+                      Automobile
+                    </Link>
+                    <Link
+                      to="/brand/solution1"
+                      className="text-gray-800 flex items-center py-2 px-3 rounded-md hover:text-red-500"
+                    >
+                      <FaBriefcase className="mr-2" style={iconStyle} />
+                      E-commerce
+                    </Link>
+                    <Link
+                      to="/brand/solution1"
+                      className="text-gray-800 flex items-center py-2 px-3 rounded-md hover:text-red-500"
+                    >
+                      <FaBriefcase className="mr-2" style={iconStyle} />
+                      Lifestyle
+                    </Link>
+                    <Link
+                      to="/brand/solution1"
+                      className="text-gray-800 flex items-center py-2 px-3 rounded-md hover:text-red-500"
+                    >
+                      <FaBriefcase className="mr-2" style={iconStyle} />
+                      Education
                     </Link>
                   </div>
                 </div>
@@ -165,11 +203,19 @@ const Header = () => {
             </div>
             <Link to="/login" className="text-black">
               Login
-            </Link>
+            </Link> 
             <Link>
               <button className="text-white bg-orange-700 hover:bg-black hover:text-white rounded-lg p-2">
                 Book Demo
               </button>
+            </Link>
+            <Link to="/profile">
+              <div className="w-10 h-10 flex justify-center items-center bg-gray-300 rounded-full border border-gray-400 mr-2 group">
+                <FaUser className="text-white text-lg" />
+                <span className="absolute bottom-full  w-auto mt-20 min-w-max text-xs text-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                  Clicked on Profile
+                </span>
+              </div>
             </Link>
           </div>
         </div>
