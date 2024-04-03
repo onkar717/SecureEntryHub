@@ -8,6 +8,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [number, setnumber] = useState("");
+  const [age, setage] = useState()
 
   const navigate = useNavigate();
 
@@ -16,6 +17,7 @@ const SignUp = () => {
     console.log("Email:", email);
     console.log("Password:", password);
     console.log("Number:", number);
+    console.log("age:", age);
 
     try {
       const response = await fetch("/signup", {
@@ -23,7 +25,7 @@ const SignUp = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password, number }),
+        body: JSON.stringify({ name, email, password, number , age }),
       });
       const data = await response.json();
       console.log("Signup successful:", data);
@@ -33,6 +35,7 @@ const SignUp = () => {
       setEmail("");
       setPassword("");
       setnumber("");
+      setage("");
     } catch (error) {
       console.error("Error signing up:", error);
       // Handle signup error here
@@ -113,7 +116,22 @@ const SignUp = () => {
               placeholder="Number"
             />
           </div>
-
+          <div>
+            <label htmlFor="age" className="sr-only">
+              age
+            </label>
+            <input
+              type="age"
+              id="age"
+              name="age"
+              autoComplete="new-age"
+              value={age}
+              onChange={(e) => setage(e.target.value)}
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:border-gradient"
+              placeholder="age"
+            />
+          </div>
           {/* Add more input fields here as needed */}
           
           <div>

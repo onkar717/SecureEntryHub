@@ -10,9 +10,9 @@ router.use(cookieParser())
 const User = require('../Modles/UserSchema');
 
 router.post('/signup', async (req, res) => {
-    const { name, email, password, number } = req.body;
+    const { name, email, password, number , age } = req.body;
 
-    if (!name || !email || !password || !number) {
+    if (!name || !email || !password || !number || !age) {
         return res.status(400).json({ error: "Please Fill the Form" });
     }
 
@@ -23,7 +23,7 @@ router.post('/signup', async (req, res) => {
         } else {
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            const user = new User({ name, email, password: hashedPassword, number });
+            const user = new User({ name, email, password: hashedPassword, number , age});
             await user.save();
             return res.status(200).json({ message: "User Register Successfully" });
         }
@@ -34,7 +34,7 @@ router.post('/signup', async (req, res) => {
 });
 
 //
-router.post('/login',Authenticate , async (req, res) => {
+router.post('/login' , async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -54,7 +54,7 @@ router.post('/login',Authenticate , async (req, res) => {
 
         // Generate JWT token upon successful login
         const token = await userlogin.generateToken();
-        console.log(token);
+        console.log("generated token " + token);
 
         // Set JWT token as a cookie in the response
         res.cookie("jwtoken", token, {
@@ -72,6 +72,13 @@ router.get('/about', Authenticate ,(req,res) => {
     console.log('hello my about');
     res.send(req.rootuser)  
   })
+  
+// logout ka page 
+router.get('/logout', (req, res) => {
+    res.clearCookie('jwtoken', { path: '/' });
+    res.status(200).send("User Logout");
+  });
+  
   
 
 module.exports = router;

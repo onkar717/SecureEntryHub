@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Signuppage from "../Images/singup.jpg"; // Make sure to import the correct image file
+import { usercontext } from "../App";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,9 @@ const Login = () => {
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [filled, setFilled] = useState(false);
+
+  const {state , dispatch} = useContext(usercontext);
+
 
   const navigate = useNavigate();
 
@@ -24,7 +28,7 @@ const Login = () => {
   };
 
   const fetchlogin = async (email, password) => {
-    try {
+    // try {
       const response = await fetch("/login", {
         method: "POST",
         headers: {
@@ -32,11 +36,21 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-      const data = await response.json();
-      navigate("/");
-      console.log(data);
-    } catch (error) {
-      console.error("Error logging in:", error);
+      // navigate("/");
+    // } catch (error) {
+    //   console.error("Error logging in:", error);
+    // }
+    const data = await response.json();
+    console.log(data);
+
+
+    if (data.status === 400 || !data) {
+      window.alert('Did not Login Succesfully')
+    }
+    else{
+      dispatch({type:"USER" , payload:true})
+      // window.alert('Login Successfully')
+      navigate('/') 
     }
   };
 

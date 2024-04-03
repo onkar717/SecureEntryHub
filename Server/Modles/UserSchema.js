@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  age: {
+    type: String,
+    required: true,
+  },
   tokens: [
     {
       token: {
@@ -31,7 +35,7 @@ const userSchema = new mongoose.Schema({
 // generate token
 userSchema.methods.generateToken = async function () {
   try {
-    let token = jwt.sign({ _id: this._id }, secretKey);
+    let token = jwt.sign({ _id: this._id }, secretKey , { expiresIn: '24h' });
     this.tokens = this.tokens.concat({token: token});
     await this.save();
     return token;

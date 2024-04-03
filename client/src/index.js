@@ -4,21 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import About from './components/About';
-import Service from './components/Service';
-import Home from './components/Home';
-import ContactForm from './components/ContactForm';
-import Login from './Authentication/Login';
-import SignUp from './Authentication/Singup';
-import Signin from './Authentication/Signin';
-import Profile from './components/Profile';
+// import About from './components/About';
+// import Service from './components/Service';
+// import Home from './components/Home';
+// import ContactForm from './components/ContactForm';
+// import Login from './Authentication/Login';
+// import SignUp from './Authentication/Singup';
+// import Signin from './Authentication/Signin';
+// import Profile from './components/Profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
   <BrowserRouter>
   <App />
-  <Routes>
+  {/* <Routes>
     <Route path="/" element={<Home/>} />
     <Route path="/about" element={<About/>} />
     <Route path="/profile" element={<Profile/>} />
@@ -27,7 +27,7 @@ root.render(
     <Route path="/login" element={<Login/>} />
     <Route path='/signin' element={<Signin />} />
     <Route path='/signup' element={<SignUp />} />
-  </Routes>
+  </Routes> */}
 </BrowserRouter>
   </React.StrictMode>
 );

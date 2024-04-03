@@ -11,12 +11,15 @@ import {
   FaBriefcase,
 } from "react-icons/fa";
 import { FaUser } from "react-icons/fa"; // Import the user icon from React Icons
+import { usercontext } from "../App";
 
 const Header = () => {
   const [showBrandDropdown, setShowBrandDropdown] = useState(false);
   const [showSocietyDropdown, setShowSocietyDropdown] = useState(false);
   const [showAboutDropdown, setShowAboutDropdown] = useState(false);
 
+  const {state } = useState(usercontext);
+  console.log(state);
   const toggleBrandDropdown = () => {
     setShowBrandDropdown(!showBrandDropdown);
   };
@@ -201,9 +204,15 @@ const Header = () => {
                 </div>
               )}
             </div>
+            {!state ? 
+            
             <Link to="/login" className="text-black">
               Login
             </Link> 
+              : 
+            <Link to="/login" className="text-black">
+              Logout
+            </Link>              }
             <Link>
               <button className="text-white bg-orange-700 hover:bg-black hover:text-white rounded-lg p-2">
                 Book Demo
@@ -222,6 +231,7 @@ const Header = () => {
       </nav>
     </div>
   );
+
 };
 
 export default Header;
